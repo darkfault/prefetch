@@ -1,0 +1,31 @@
+[Unit]
+Description=Prefetch Daemon - Intelligent file page cache warming
+Documentation=https://github.com/darkfault/prefetch
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/prefetch daemon --foreground
+Restart=on-failure
+RestartSec=10
+
+# Run as the user (not root)
+# Override with: systemctl --user edit prefetch
+# User=%I
+
+# Low resource priority
+Nice=19
+IOSchedulingClass=idle
+
+# Security hardening
+NoNewPrivileges=yes
+ProtectSystem=strict
+ProtectHome=read-only
+PrivateTmp=yes
+
+# Allow read access to model files
+ReadOnlyPaths=/home
+ReadWritePaths=%h/.local/share/prefetch
+
+[Install]
+WantedBy=default.target

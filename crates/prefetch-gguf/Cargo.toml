@@ -1,0 +1,10 @@
+[package]
+name = "prefetch-gguf"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Lightweight GGUF file format parser for tensor layout extraction"
+
+[dependencies]
+thiserror = { workspace = true }
+tracing = { workspace = true }

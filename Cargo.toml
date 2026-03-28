@@ -1,0 +1,53 @@
+[workspace]
+resolver = "2"
+members = [
+    "crates/prefetch-cli",
+    "crates/prefetch-core",
+    "crates/prefetch-gguf",
+    "crates/prefetch-daemon",
+    "crates/prefetch-config",
+]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+repository = "https://github.com/darkfault/prefetch"
+description = "Intelligent file prefetching with format-aware byte range ordering"
+
+[workspace.dependencies]
+# Async runtime
+tokio = { version = "1", features = ["rt-multi-thread", "fs", "sync", "time", "signal", "macros"] }
+
+# CLI
+clap = { version = "4", features = ["derive"] }
+
+# Serialization & config
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+toml = "0.8"
+
+# System interfaces
+libc = "0.2"
+memmap2 = "0.9"
+sysinfo = "0.31"
+
+# Logging
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+
+# Errors
+thiserror = "2"
+anyhow = "1"
+
+# Platform paths
+directories = "5"
+
+# Time
+chrono = { version = "0.4", features = ["serde"] }
+
+# Internal crates
+prefetch-core = { path = "crates/prefetch-core" }
+prefetch-gguf = { path = "crates/prefetch-gguf" }
+prefetch-daemon = { path = "crates/prefetch-daemon" }
+prefetch-config = { path = "crates/prefetch-config" }

@@ -1,0 +1,19 @@
+[package]
+name = "prefetch-daemon"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Daemon mode with filesystem watching and usage prediction"
+
+[dependencies]
+prefetch-core = { workspace = true }
+prefetch-config = { workspace = true }
+prefetch-gguf = { workspace = true }
+tokio = { workspace = true }
+tracing = { workspace = true }
+thiserror = { workspace = true }
+anyhow = { workspace = true }
+sysinfo = { workspace = true }
+chrono = { workspace = true }
+serde = { workspace = true }
+serde_json = { workspace = true }

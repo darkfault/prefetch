@@ -1,0 +1,32 @@
+# prefetch configuration
+# Place this file at: ~/.config/prefetch/config.toml (Linux)
+#                   or ~/Library/Application Support/prefetch/config.toml (macOS)
+
+[general]
+log_level = "info"
+# db_path = "~/.local/share/prefetch/history.db"
+
+[prefetch]
+# Strategy for warming models:
+#   "inference-order"  - Load layers in the order they're accessed during inference (recommended)
+#   "sequential"       - Load the file from start to end (simple, no GGUF parsing needed)
+#   "first-n-layers"   - Load only embedding + first N transformer blocks
+strategy = "inference-order"
+first_n_layers = 8        # Used when strategy = "first-n-layers"
+chunk_size_mb = 64        # Size of each readahead advisory chunk
+
+[memory]
+max_cache_percent = 50    # Don't use more than 50% of free RAM for cache warming
+min_free_ram_gb = 2       # Always keep at least 2 GB free
+
+[watch]
+# Directories to watch for GGUF model files
+directories = [
+    "~/.ollama/models",
+]
+poll_interval_secs = 300  # Fallback polling interval (seconds)
+
+[prediction]
+enabled = true
+lookahead_minutes = 30    # How far ahead to predict model usage
+min_frequency = 3         # Minimum historical loads before predicting a model
